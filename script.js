@@ -1,22 +1,25 @@
+// script.js  →  Open in SAME TAB version
 function redirectToOffer() {
-  window.open('https://glitchy.go2cloud.org/aff_c?offer_id=795&aff_id=4035', '_blank', 'noopener,noreferrer');
+  // This replaces the current page (same tab)
+  window.location.href = 'https://glitchy.go2cloud.org/aff_c?offer_id=795&aff_id=4035';
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('getYoursBtn');
 
-  button.addEventListener('click', function() {
+  button.addEventListener('click', function () {
     const originalText = button.textContent;
-    
-    // Show loading state
+
+    // Show loading feedback
     button.textContent = 'Redirecting...';
     button.style.opacity = '0.8';
-    button.disabled = true; // Prevent double clicks
+    button.disabled = true; // prevent double-clicks
 
-    // Trigger redirect
+    // Actually redirect (same tab)
     redirectToOffer();
 
-    // Restore button after 1.2 seconds (feels natural)
+    // Optional: restore button text after a short delay
+    // (user won't see it because the page is already leaving)
     setTimeout(() => {
       button.textContent = originalText;
       button.style.opacity = '1';
@@ -24,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1200);
   });
 
-  // Smooth card entrance animation
+  // Card entrance animation (unchanged)
   const card = document.querySelector('.card');
   card.style.opacity = '0';
   card.style.transform = 'translateY(30px)';
