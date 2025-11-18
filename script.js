@@ -1,30 +1,36 @@
 function redirectToOffer() {
-  window.open('https://glitchy.go2cloud.org/aff_c?offer_id=795&aff_id=4035', '_blank');
+  window.open('https://glitchy.go2cloud.org/aff_c?offer_id=795&aff_id=4035', '_blank', 'noopener,noreferrer');
 }
 
-// Add some interactive feedback
 document.addEventListener('DOMContentLoaded', function() {
-  const button = document.querySelector('.get-yours-btn');
-  
+  const button = document.getElementById('getYoursBtn');
+
   button.addEventListener('click', function() {
-    // Add a brief loading state
     const originalText = button.textContent;
+    
+    // Show loading state
     button.textContent = 'Redirecting...';
     button.style.opacity = '0.8';
-    
+    button.disabled = true; // Prevent double clicks
+
+    // Trigger redirect
+    redirectToOffer();
+
+    // Restore button after 1.2 seconds (feels natural)
     setTimeout(() => {
       button.textContent = originalText;
       button.style.opacity = '1';
-    }, 1000);
+      button.disabled = false;
+    }, 1200);
   });
-  
-  // Add subtle animations on load
+
+  // Smooth card entrance animation
   const card = document.querySelector('.card');
   card.style.opacity = '0';
-  card.style.transform = 'translateY(20px)';
-  
+  card.style.transform = 'translateY(30px)';
+
   setTimeout(() => {
-    card.style.transition = 'all 0.5s ease';
+    card.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
     card.style.opacity = '1';
     card.style.transform = 'translateY(0)';
   }, 100);
